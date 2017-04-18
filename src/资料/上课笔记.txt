@@ -35,8 +35,8 @@
          
        2.webservice的规则
          - xml 
-	 - soap ：（simple object access 协议） ：简单对象访问协议
-	 - wsdl ： webservice描述语言 ，它也是xml实现的
+         - soap ：（simple object access 协议） ：简单对象访问协议,比http更慢，
+         - wsdl ： webservice描述语言 ，它也是xml实现的
        3.webservice的优点
          
        4.webservice专业名称
