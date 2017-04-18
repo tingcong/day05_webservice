@@ -1,0 +1,145 @@
+    
+    Web Service 教程
+
+一、webservice介绍  
+ 
+   1.使用场景
+   
+      - 不同的移动客户端访问
+      - 需要访问第三方的项目 
+
+   2.访问第三方应用的方式
+      ISO的七层模型  ： 物理层、数据链路层、网络层、传输层、表示层、会话层、应用层
+     - Socket访问  ： Socket属于传输层，它是对Tcp/ip协议的实现，包含TCP/UDP,它是所有通信协议
+                       的基础，Http协议需要Socket支持，以Socket作为基础
+        Socket通信特点：
+	  1. 开启端口，该通信是 长连接的通信 ，很容易被防火墙拦截，可以通过心跳机制
+	               来实现 ，开发难度片段
+	  2. 传输的数据一般是字符串 ，可读性不强
+	            lj|16|1|60|up  
+          3. socket端口不便于推广 
+	     http:17.23.23.2:2345   www.jd.com   www.360buy.com
+	  4. 性能相对于其他的通信协议是最优的
+     - Http协议访问 ：属于应用层的协议，对Socket进行了封装
+          1. 跨平台 
+	  2. 传数据不够友好 ： 
+	     get请求： http://127.0.0.1:8888?username=lj&pwd=1234
+	  3. 对第三方应用提供的服务，希望对外暴露服务接口
+	    
+     问题：
+       1. 数据封装不够友好 ：可以用xml封装数据 
+       2. 希望给第三方应用提供web方式的服务  （http + xml） = web  Service
+          
+     - Webservice
+       1.webService介绍
+         
+       2.webservice的规则
+         - xml 
+	 - soap ：（simple object access 协议） ：简单对象访问协议
+	 - wsdl ： webservice描述语言 ，它也是xml实现的
+       3.webservice的优点
+         
+       4.webservice专业名称
+         1. xml
+         2. wsdl
+	 3. soap 
+
+二、调用第三方的WS服务
+
+   1.体验webservice    www.webxml.com.cn
+     
+   2.准备客户端，调用第三方的webservice服务，让本项目有手机查号的功能
+     - 一般访问方式  HttpClient
+       1. Http-GET
+       2. Http-Post 
+       3. Soap (http+xml)
+     问题：1. 如何解析结果
+           2. 如何传递对象参数 
+
+     - 推荐的访问方式
+          在jdk 1.6 版本以后 ，通过jax-ws 包提供对webservice的支持 
+	     - 该方式通过注解的方式来声明webservice 
+	     - 通过 jdk EndPoint.publish()发布webserive服务
+
+	    早期的版本 ： jax-rpc （remote produce call）
+
+	   webservice 纳入 w3c规范，其他的平台都支持该规范 ：JEE\Php\.NET
+	    都支持wsimport 方式 ： 对远程的webservice生成本地代理，再通过本地代理
+	                           来访问webservice
+        - wsimport 命令的位置： 
+	   C:\Program Files\Java\jdk1.7.0_04\bin
+	- 要求：
+	  1. jdk的 版本要在 jdk 1.6.21及以上 
+	  2. 操作系统安装的jdk版本 与 MyEclispe 及 默认指定的版本要一致
+
+	- wsimport使用： 
+	  记得设置jdk\bin  环境变量  指定path 
+           语法  wsimport [opations] <wsdl_uri>
+	     - wsdl_uri:wsdl 的统一资源标识符
+	     - d  ：指定要输出的文件的位置
+	     - s  ：表示要解析java的源码 ，默认解析出的是class字节码 
+	     - p  ： 指定输出的包名
+		  
+	   
+三、自定义及发布一个webservice服务
+    - 声明 某个业务服务为webservice服务
+       通过@webservice 注解来声明
+    - 发布webservice服务
+       Endpoint.publish()发布
+    - 通过wsimport生成本地代理来访问自己发布的webservice
+       wsimport
+      
+     
+四、webservice传输实体对象
+  
+五、练习:
+ 
+ 
+   1. 调用教师机的ws服务
+      步骤：
+       1. 系统jdk环境与myeclipse jdk 环境一致  ，1.6.021以上  
+       2. 知道服务端的WDSL路径
+           http://192.168.114.10:8888/ws/phoneService?WSDL
+       3. 命令行 wsimport -s ./ -p  cn.itcast.ws.d http://192.168.114.10:8888/ws/phoneService?WSDL
+       4. 导入通过wsimport 解析的java类，再编写一个main测试
+                MoblieOsInfoService ws=new MoblieOsInfoService();
+		MoblieOsInfo phoneServicePort = ws.getMoblieOsInfoPort()
+                 PhoneOs phone=phoneServicePort.getMobileOsInfo("android");
+		
+
+   2. 创建自己的ws服务并发布、调用
+   步骤： 1.声明webservice服务 （@webService）2. 发布webservice（EndPoint.publish） 3. 客户端访问（wsimport）
+      1. 创建一个要通过webservice对外发布的java bean ： PhoneService
+      2. 在java 的入口main方法 通过EndPoint 发布一个服务端点
+         String address1="http://192.168.19.10:8888/ws/phoneService";
+         Endpoint.publish(address1, new PhoneService());
+         System.out.println("adrress1的WSDL地址"+address1+"?WSDL");
+  
+
+
+六、WSDL文件介绍 ：webservice服务说明 
+
+
+七、通过注解配置修改wsdl文件, 让它具有更好的可读性 
+   需求：
+     1. 想改方法的输入参数名、返回参数名
+     2. 想改服务名，方法名
+     3. 对该业务类的某些方法不想对外发布 
+       -  默认只有public 修饰的方法会以webservice的形式对外发布 
+	 而 private  受保护的，缺省的，都不会发布
+       - 某些public 方法也不想对外发布 
+
+   实现：注解配置修改wsdl文件
+   
+    
+
+  重点：
+    1. webservice 的作用、规则、优点
+    2. 专业名词
+       wsdl 、 soap 、 xml
+    3. wsimport 生成本地代理
+    4. 通过JEE方式声明与发布webservice
+       - 声明 ：@webservice
+       - 发布 ：EndPoint
+    5. WSDL文件描述 
+    6. 通过修改注解，配置wsdl文件，增强可读性 
