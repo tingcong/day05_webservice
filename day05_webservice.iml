@@ -39,5 +39,15 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="cxf-noSpringAndServlet" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/myLanguage/ml.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

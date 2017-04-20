@@ -1,0 +1,20 @@
+<component name="libraryTable">
+  <library name="cxf-noSpringAndServlet">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/cxf_noSpring_noServlet/asm-3.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/cxf_noSpring_noServlet/commons-logging-1.1.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/cxf_noSpring_noServlet/cxf-2.4.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/cxf_noSpring_noServlet/jetty-continuation-7.4.5.v20110725.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/cxf_noSpring_noServlet/jetty-http-7.4.5.v20110725.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/cxf_noSpring_noServlet/jetty-io-7.4.5.v20110725.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/cxf_noSpring_noServlet/jetty-security-7.4.5.v20110725.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/cxf_noSpring_noServlet/jetty-server-7.4.5.v20110725.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/cxf_noSpring_noServlet/jetty-util-7.4.5.v20110725.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/cxf_noSpring_noServlet/neethi-3.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/cxf_noSpring_noServlet/wsdl4j-1.6.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/cxf_noSpring_noServlet/xmlschema-core-2.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

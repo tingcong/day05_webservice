@@ -3,4 +3,4 @@
     wdsl获取网站：www.webxml.com.cn
 
     DOS下：wsimport E:/weather.xml
-            jar cvf weather.ar ./
+            jar cvf weather.jar ./
