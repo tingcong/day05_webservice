@@ -17,7 +17,7 @@ import javax.xml.ws.Endpoint;
  * Created by 聪 on 2017/4/19.
  */
 @WebService(serviceName = "PhoneManager", //修改服务名
-        targetNamespace = "http:d.WS_Service.tc.cn")//修改命名空间 ，默认包名，取反
+        targetNamespace = "http://d.WS_Service.tc.cn")//修改命名空间 ，默认包名，取反
 //声明该业务类 对外提供webservice服务   ,默认只是对public 修饰的方法对外以webservice形式发布
 public class PhoneService {
 

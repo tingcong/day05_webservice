@@ -1,0 +1,131 @@
+webservice  web服务
+
+一、复习回顾
+
+  1. 内容回顾
+     
+  2. 四个概念 
+     - soap :简单对象访问协议 http+xml
+     - Soa  ：面向服务的架构，它是一种思想，IBM大力倡导
+            service 1   、service2  、Service3  ， 服务都是面向web的 ，而且是即插即用的
+	        IBM大力提倡，希望以组装电脑的方式来开发应用
+             组成：
+               1. 面向web的服务，面向web的组件  ：WebService ： 硬盘、cpu、内存条
+               2. 企业服务总线 （EnterPrise Service Bus ：ESB）。主板
+     - wsdl ： webservice 描述语言
+     - uddi 
+       Universal Description, Discovery and Integration
+         统一描述、发现、集成
+        它是目录服务，通过该服务可以注册和发布webservcie，以便第三方的调用者统一调用
+  3. 两个思考
+
+      思考：webservice在web应用的三层架构中，位于哪一层中呢？ 
+            属于业务层  Service
+
+      思考：你觉得webservice有严格的客户端和服务端吗？
+            没有，相对服务端和客户端
+
+二、带有接口的webservice发布方式
+   
+   1. 通过EndPoint发布带有接口的webservice
+       JobService  : 
+         getJob()
+
+   2. 打jar包 
+      命令行： jar  cvf jobService.jar ./cn
+
+三、通过 jsp+ajax+servlet+webservice 远程访问天气预报服务
+   - webservice 客户端访问的方式
+     1. java代码来访问
+     2. ajax 方式异步加载webservice
+
+   - 通过 ajax 异步加载 天气信息实现步骤：
+     1. 了解远程第三方的天气预报webservice服务
+        广东,31124   广州,2350   东莞,2351  深圳,2419   温度信息  String[8]
+     2. wsimport 生成本地代理
+     3. 准备一个index.jsp  页面，显示城市信息 ，下拉城市，显示天气信息  
+     4. 准备一个weatherServlet ,通过它来访问webservcie
+     5. Servlet要在web .xml注册
+
+  通过Jdk  
+   声明 ：@Webservice
+     发布 ：EndPoint 
+      不足： 希望tomcat启动时，webservice服务能够开启 ，最好与Spring集成
+              希望有一个webservice的服务列表 
+   通过Webservice框架来实现 ：axis2  、xfire
+   
+    
+四、使用CXF框架，发布webservice服务，并使用客户端远程访问webservice
+  1. CXF介绍 ：soa的框架
+    * cxf 是 Celtrix （ESB框架）和 XFire（webserivice） 合并而成，并且捐给了apache  
+    * CxF的核心是org.apache.cxf.Bus(总线)，类似于Spring的 ApplicationContext
+    * CXF默认是依赖于Spring的
+    * Apache CXF 发行包中的jar，如果全部放到lib中，需要 JDK1.6 及以上，否则会报JAX-WS版本不一致的问题
+    * CXF 内置了Jetty服务器 ，它是servlet容器，好比tomcat
+  2.CXF特点
+    1. 与Spring、Servlet做了无缝对接，cxf框架里面集成了Servlet容器Jetty 
+    2. 支持注解的方式来发布webservice
+    3. 能够显示一个webservice的服务列表
+    4. 能够添加拦截器：输入拦截器、输出拦截器 ：
+         输入日志信息拦截器、输出日志拦截器、用户权限认证的拦截器
+   
+五、Spring+CXF整合来管理webservice
+    实现步骤：
+      1. 添加cxf.jar 包（集成了Spring.jar、servlet.jar ）,spring.jar包 ，servlet.jar 包
+      2. 编写业务类，通过CXF来发布webservice
+         员工管理：
+	   方法 ：添加员工、查询员工  
+	        
+      3. 添加一个CXF请求的 Servlet，用来处理webservice的请求 
+           过滤的地址/ws/*
+      4. 配置Spring的配置文件： applicationContext.xml ,把cxf的bean在spring配置
+          
+      5. 在web.xml中配置 CXF的 Servlet ， 添加spring的监听 
+
+      6. 通过wsimport生成本地代理 ，访问webservice 
+
+六、 练习：
+    Spring与CXF整合
+     - 添加 cxf.jar、添加Spring框架、Servlet.jar包
+     - web.xml 配置
+       1. 配置CXF的Servlet，用来处理所有 webservice请求 
+	  配置Servlet
+	   <servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+	   <url-pattern>/ws/*</url-pattern>
+       2. 加载spring监听器
+     - 业务类，通过cxf发布的webservice的业务bean
+       员工管理webservice服务
+	  1. 添加员工
+	  2. 查询所有员工
+	  3. 通过List<Employee> 来保存员工
+     - spring 配置文件配置bean
+        配置cxf 
+     - 客户端访问
+       测试 
+
+七、webservice测试工具 
+     web service exprlorer  
+
+八、soap1.1与soap1.2区别
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+- Soa  ：面向服务的架构，它是一种思想 
+          service 1、service2 、service3  所有服务面向web，即插即用
+          IBM大力提倡Soa架构 ，希望以组装电脑的方式来开发软件
+           - 提供各种服务的组件（webservice）：硬盘、cpu 、内存条
+           - 企业服务总线 （Enterprise service bus）:主板

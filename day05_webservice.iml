@@ -20,6 +20,16 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="httpClient" level="project" />
+    <orderEntry type="library" name="tomcat-lib" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/jobService.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
@@ -29,6 +39,5 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="tomcat-lib" level="project" />
   </component>
 </module>

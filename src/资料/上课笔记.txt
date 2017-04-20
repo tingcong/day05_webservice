@@ -80,7 +80,7 @@
                      - s  ：表示要解析java的源码 ，默认解析出的是class字节码
                      - p  ： 指定输出的包名
 
-	   
+	        jar -cvf jobService.jar ./cn打成jar包
 三、自定义及发布一个webservice服务
     - 声明 某个业务服务为webservice服务
        通过@webservice 注解来声明

@@ -15,46 +15,36 @@ import java.util.List;
 /**
  * Created by 聪 on 2017/4/20.
  */
-@WebServlet(name = "/weather")
+@WebServlet(urlPatterns = "/weatherServlet")
 public class WeatherServlet extends HttpServlet {
     private WeatherWS ws;
 
-    public void init() throws ServletException {
-        // Put your code here
-        ws = new WeatherWS();
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        this.doGet(request,response);
     }
 
-    public WeatherServlet() {
-        super();
-    }
-
-    public void destroy() {
-        super.destroy(); // Just puts "destroy" string in log
-        // Put your code here
-    }
-
-    public void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        this.doPost(request, response);
-
-    }
-
-    public void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         String cityCode=request.getParameter("city");
-        System.out.println("获取城市的id"+cityCode);
+        System.out.println("获取城市的id:"+cityCode);
 
-        //通过webservice获取远程的天气预报信息
+        //通过webservice获取远程的天气信息
         WeatherWSSoap weatherWSSoap=ws.getWeatherWSSoap();
         List<String> weathers=weatherWSSoap.getWeather(cityCode,"").getString();
-        String weather=weathers.get(8); //取得温度信息
+        String weather=weathers.get(8); //取得温度的信息
 
-        //把结果回显给页面
+        //把结果回显页面
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter printWriter=response.getWriter();
         printWriter.write(weather);
+
         printWriter.flush();
         printWriter.close();
+    }
+
+    @Override
+    public void init() throws ServletException {
+        //put your code here
+        ws=new WeatherWS();
     }
 }
