@@ -6,11 +6,13 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
+import javax.xml.ws.Endpoint;
 
 /**
  * 手机的业务类，该业务类通过webservice 对外提供服务
- * 1. 声明： @webservice
- * 2. 发布 EndPoint
+ * 1.声明webservice服务 （@webService）
+ * 2. 发布webservice（EndPoint.publish）
+ * 3. 客户端访问（wsimport）
  * <p>
  * Created by 聪 on 2017/4/19.
  */
@@ -20,11 +22,11 @@ import javax.jws.WebService;
 public class PhoneService {
 
     /**
+     * @param osName
+     * @return
      * @WebMethod(operationName="getMObileInfo"): 修改方法名
      * @WebResult(name="phone")：修改返回参数名
      * @WebParam(name="osName")：修改输入参数名
-     * @param osName
-     * @return
      */
     @WebMethod(operationName = "getMobileInfo")
     public @WebResult(name = "phone")
@@ -44,5 +46,33 @@ public class PhoneService {
             phone.setTotal(5);
         }
         return phone;
+    }
+
+    @WebMethod(exclude = true)//把该方法排除在外
+    public void sayHello(String city) {
+        System.out.println("你好：" + city);
+    }
+
+    private void sayLuck(String city) {
+        System.out.println("好友:" + city);
+    }
+
+    void sayGoodBye(String city) {
+        System.out.println("拜拜：" + city);
+    }
+
+    protected void saySayalala(String city) {
+        System.out.println("再见！" + city);
+    }
+
+    public static void main(String[] args) {
+        String address1 = "http://127.0.0.1:8888/ws/phoneService";
+        /**
+         * 发布webservice服务
+         *  1.address：服务的地址
+         *  2.implementor 服务的实现对象
+         */
+        Endpoint.publish(address1, new PhoneService());
+        System.out.println("wsdl地址 :" + address1 + "?WSDL");
     }
 }

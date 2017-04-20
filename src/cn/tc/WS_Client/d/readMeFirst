@@ -1,0 +1,10 @@
+访问自己发布的phoneService服务，
+1.在dos中通过wsimport生成Java代码：
+       Wsimport http://127.0.0.1:8888/ws/phoneService?WSDL   // 只能生成 class格式
+       wsimport –s . http://127.0.0.1:8888/ws/phoneService?WSDL   // 能生成 class格式和Java源文件
+       Wsimport –s . –p d http://127.0.0.1:8888/ws/phoneService?WSDL // 能生成 class格式和Java源文件  并且可以自定义包名(d)
+
+将生成的包拷贝到idea中（这里是cn.tc.WS_Client中）
+
+新建Main类调用phoneservice服务
+

@@ -67,19 +67,19 @@
 	    都支持wsimport 方式 ： 对远程的webservice生成本地代理，再通过本地代理
 	                           来访问webservice
         - wsimport 命令的位置： 
-	   C:\Program Files\Java\jdk1.7.0_04\bin
+           C:\Program Files\Java\jdk1.7.0_04\bin
 	- 要求：
 	  1. jdk的 版本要在 jdk 1.6.21及以上 
 	  2. 操作系统安装的jdk版本 与 MyEclispe 及 默认指定的版本要一致
 
 	- wsimport使用： 
 	  记得设置jdk\bin  环境变量  指定path 
-           语法  wsimport [opations] <wsdl_uri>
-	     - wsdl_uri:wsdl 的统一资源标识符
-	     - d  ：指定要输出的文件的位置
-	     - s  ：表示要解析java的源码 ，默认解析出的是class字节码 
-	     - p  ： 指定输出的包名
-		  
+           语法  wsimport [opations] <wsdl_uri>       (dos下输入wsimport)
+                     - wsdl_uri:wsdl(WebService Description Language – Web服务描述语言) 的统一资源标识符
+                     - d  ：指定要输出的文件的位置
+                     - s  ：表示要解析java的源码 ，默认解析出的是class字节码
+                     - p  ： 指定输出的包名
+
 	   
 三、自定义及发布一个webservice服务
     - 声明 某个业务服务为webservice服务
